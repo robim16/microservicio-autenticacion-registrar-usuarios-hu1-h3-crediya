@@ -2,10 +2,10 @@ dependencies {
     implementation project(':model')
     implementation 'org.springframework:spring-context'
     implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-    implementation 'io.asyncer:r2dbc-mysql:1.4.0'
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+    implementation 'org.postgresql:r2dbc-postgresql'
     implementation 'org.reactivecommons.utils:object-mapper-api:0.1.0'
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'io.projectreactor:reactor-test'
+
+    testImplementation 'org.reactivecommons.utils:object-mapper:0.1.0'
 }
 

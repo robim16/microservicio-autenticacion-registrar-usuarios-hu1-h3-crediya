@@ -20,11 +20,12 @@ routes:
     login: "/api/v1/login"
 adapters:
   r2dbc:
-    host: "${MYSQL_HOST:localhost}"
-    port: "${MYSQL_PORT:3306}"
-    database: "${MYSQL_DB:crediyadb}"
-    username: "${MYSQL_USER:crediya}"
-    password: "${MYSQL_PASSWORD:password}"
+    host: "${POSTGRES_HOST:localhost}"
+    port: "${POSTGRES_PORT:5434}"
+    database: "${POSTGRES_DB:usersdb}"
+    schema: "public"
+    username: "${POSTGRES_USER:postgres}"
+    password: "${POSTGRES_PASSWORD:Shekina1}"
 management:
   endpoints:
     web:

@@ -28,3 +28,5 @@ include ':password-service-adapter'
 project(':password-service-adapter').projectDir = file('./infrastructure/driven-adapters/password-service-adapter')
 include ':jwt-token-service-adapter'
 project(':jwt-token-service-adapter').projectDir = file('./infrastructure/driven-adapters/jwt-token-service-adapter')
+include ':r2dbc-postgresql'
+project(':r2dbc-postgresql').projectDir = file('./infrastructure/driven-adapters/r2dbc-postgresql')

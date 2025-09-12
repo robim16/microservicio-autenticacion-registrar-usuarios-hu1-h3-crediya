@@ -17,7 +17,7 @@ public class RolReactiveRepositoryAdapter extends ReactiveAdapterOperations<
         RolEntity,
         BigInteger,
         RolReactiveRepository
-> implements RolRepository {
+        > implements RolRepository {
     public RolReactiveRepositoryAdapter(RolReactiveRepository repository, ObjectMapper mapper) {
 
         super(repository, mapper, d -> mapper.map(d, Rol.class));

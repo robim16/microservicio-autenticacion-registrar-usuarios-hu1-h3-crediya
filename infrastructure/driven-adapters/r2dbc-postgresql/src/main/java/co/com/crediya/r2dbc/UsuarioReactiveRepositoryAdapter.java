@@ -20,7 +20,7 @@ public class UsuarioReactiveRepositoryAdapter extends ReactiveAdapterOperations<
         UsuarioEntity,
         BigInteger,
         UsuarioReactiveRepository
-> implements UsuarioRepository {
+        > implements UsuarioRepository {
 
     private static final Logger log = LoggerFactory.getLogger(UsuarioReactiveRepositoryAdapter.class);
     private final TransactionalOperator transactionalOperator;
