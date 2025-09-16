@@ -16,29 +16,33 @@ import java.util.Base64;
 @Component
 public class KeyLoader {
 
-    public PrivateKey loadPrivateKey(String location) throws Exception {
-        Resource resource = resolveResource(location);
-        String keyPem = Files.readString(resource.getFile().toPath())
+    public static PrivateKey loadPrivateKey(String location) throws Exception {
+        ClassPathResource resource = new ClassPathResource(location.replace("classpath:", ""));
+
+        String keyString = new String(resource.getInputStream().readAllBytes())
                 .replace("-----BEGIN PRIVATE KEY-----", "")
                 .replace("-----END PRIVATE KEY-----", "")
                 .replaceAll("\\s+", "");
 
-        byte[] keyBytes = Base64.getDecoder().decode(keyPem);
-        PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
+        byte[] decoded = Base64.getDecoder().decode(keyString);
+        PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(decoded);
         return KeyFactory.getInstance("RSA").generatePrivate(spec);
     }
 
-    public PublicKey loadPublicKey(String location) throws Exception {
-        Resource resource = resolveResource(location);
-        String keyPem = Files.readString(resource.getFile().toPath())
+
+    public static PublicKey loadPublicKey(String location) throws Exception {
+        ClassPathResource resource = new ClassPathResource(location.replace("classpath:", ""));
+
+        String keyString = new String(resource.getInputStream().readAllBytes())
                 .replace("-----BEGIN PUBLIC KEY-----", "")
                 .replace("-----END PUBLIC KEY-----", "")
                 .replaceAll("\\s+", "");
 
-        byte[] keyBytes = Base64.getDecoder().decode(keyPem);
-        X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
+        byte[] decoded = Base64.getDecoder().decode(keyString);
+        X509EncodedKeySpec spec = new X509EncodedKeySpec(decoded);
         return KeyFactory.getInstance("RSA").generatePublic(spec);
     }
+
 
     private Resource resolveResource(String location) {
         if (location.startsWith("classpath:")) {
@@ -46,7 +50,6 @@ public class KeyLoader {
         } else if (location.startsWith("file:")) {
             return new FileSystemResource(location.substring("file:".length()));
         } else {
-            // por defecto intenta filesystem
             return new FileSystemResource(location);
         }
     }
