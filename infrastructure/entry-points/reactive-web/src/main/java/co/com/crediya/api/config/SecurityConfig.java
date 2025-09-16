@@ -26,7 +26,8 @@ public class SecurityConfig {
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(auth -> auth
                         .pathMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
-                        .pathMatchers(HttpMethod.POST, "/api/v1/usuarios").hasAnyRole("ADMIN", "ASESOR")
+                        .pathMatchers(HttpMethod.POST, "/api/v1/usuarios").permitAll()
+                        //.hasAnyRole("ADMIN", "ASESOR")
                         .pathMatchers(HttpMethod.GET, "/api/v1/usuarios/**").hasAnyRole("CLIENTE","ADMIN", "ASESOR")
                         .anyExchange().authenticated()
                 )

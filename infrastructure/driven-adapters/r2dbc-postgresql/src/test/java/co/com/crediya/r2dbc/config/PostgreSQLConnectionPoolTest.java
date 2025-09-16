@@ -1,4 +1,4 @@
-package co.com.crediya.r2dbc.config;
+package co.com.crediya.r2dbc.config.package.crediya.r2dbc.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,10 +12,10 @@ import static org.mockito.Mockito.when;
 class PostgreSQLConnectionPoolTest {
 
     @InjectMocks
-    private MySQLConnectionPool connectionPool;
+    private PostgreSQLConnectionPool connectionPool;
 
     @Mock
-    private MySqlConnectionProperties properties;
+    private PostgresqlConnectionProperties properties;
 
 
     @BeforeEach
