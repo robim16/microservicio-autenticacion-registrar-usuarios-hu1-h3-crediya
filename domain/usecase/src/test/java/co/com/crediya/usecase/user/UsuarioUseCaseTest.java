@@ -47,6 +47,54 @@ class UsuarioUseCaseTest {
     }
 
     @Test
+    void createUser_ShouldReturnUsuario_WhenValid() {
+        Usuario usuario = Usuario.builder()
+                .id(BigInteger.ONE)
+                .documentoIdentidad("123456789")
+                .nombre("Carlos")
+                .apellidos("Arteaga")
+                .email("test@gmail.com")
+                .fechaNacimiento(LocalDate.of(1990, 1, 1))
+                .direccion("Calle Falsa 123")
+                .idRol(BigInteger.ONE)
+                .salarioBase(2000000L)
+                .password("secret")
+                .build();
+
+        when(usuarioRepository.registrarUsuario(any(Usuario.class)))
+                .thenReturn(Mono.just(usuario));
+
+        Mono<Usuario> result = usuarioUseCase.createUser(usuario);
+
+        StepVerifier.create(result)
+                .expectNext(usuario)
+                .verifyComplete();
+    }
+
+    @Test
+    void createUser_ShouldReturnError_WhenInvalid() {
+
+        Usuario usuarioInvalido = Usuario.builder()
+                .documentoIdentidad("123456789")
+                .nombre("Carlos")
+                .apellidos("Arteaga")
+                .email("")
+                .fechaNacimiento(LocalDate.of(1990, 1, 1))
+                .direccion("Calle Falsa 123")
+                .idRol(BigInteger.ONE)
+                .salarioBase(2000000L)
+                .password("secret")
+                .build();
+
+
+        Mono<Usuario> result = usuarioUseCase.createUser(usuarioInvalido);
+        
+        StepVerifier.create(result)
+                .expectError(InvalidUsuarioException.class)
+                .verify();
+    }
+
+    @Test
     void login_debeRetornarTokenCuandoCredencialesSonValidas() {
         Usuario usuario = Usuario.builder()
                 .email("test@test.com")
