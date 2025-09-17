@@ -39,7 +39,7 @@ public class Handler {
     @Operation(
             summary = "Crear un nuevo usuario",
             description = "Crea un usuario a partir de un DTO con información personal, rol y salario",
-            security = @SecurityRequirement(name = "bearerAuth"),
+            security = @SecurityRequirement(name = "BearerAuth"),
             requestBody = @RequestBody(
                     required = true,
                     content = @Content(
@@ -77,7 +77,7 @@ public class Handler {
     @Operation(
             summary = "Buscar usuario por ID",
             description = "Obtiene un usuario existente a partir de su identificador único",
-            security = @SecurityRequirement(name = "bearerAuth"),
+            security = @SecurityRequirement(name = "BearerAuth"),
             parameters = {
                     @Parameter(
                             name = "id",
@@ -115,7 +115,7 @@ public class Handler {
     @Operation(
             summary = "Buscar usuario por email",
             description = "Obtiene un usuario existente a partir de su email único",
-            security = @SecurityRequirement(name = "bearerAuth"),
+            security = @SecurityRequirement(name = "BearerAuth"),
             parameters = {
                     @Parameter(
                             name = "email",
